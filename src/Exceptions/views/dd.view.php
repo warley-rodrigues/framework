@@ -31,7 +31,7 @@
         }
     </style>
 
-    @include(path()->framework('Exceptions/views/dump.view.php'))
+    @include(path()->framework('Exceptions/views/dump.bns.php'))
 
     @section('title')
     <a class="dd-title" href="vscode://file{{ $file }}:{{ $line }}">{{ $file }} - {{ $line }}</a>

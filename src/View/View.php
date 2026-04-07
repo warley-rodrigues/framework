@@ -18,9 +18,9 @@ class View
 
         $path = match (true) {
             file_exists($path) and is_file($path) => $path,
+            file_exists($path . '.bns.php') and is_file($path . '.bns.php') => $path . '.bns.php',
             file_exists($path . '.php') and is_file($path . '.php') => $path . '.php',
             file_exists($path . '.blade.php') and is_file($path . '.blade.php') => $path . '.blade.php',
-            file_exists($path . '.view.php') and is_file($path . '.view.php') => $path . '.view.php',
 
             default => throw new Exception('File view not found: ' . $path)
         };
@@ -107,7 +107,7 @@ class View
 
     private function key(string $path)
     {
-        $key = str_replace(['.php', '.blade.php', '.view.php'], '', $path);
+        $key = str_replace(['.php', '.blade.php', '.bns.php'], '', $path);
         $key = trim(str_replace(['/', '\\', '.'], '-', $key), '-');
 
         return $key;

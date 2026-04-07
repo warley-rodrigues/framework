@@ -45,14 +45,14 @@ class Response
     {
         if (ob_get_level()) ob_clean();
 
-        if (file_exists(path()->resources('views/error/' . $status . '.view.php'))) {
+        if (file_exists(path()->resources('views/error/' . $status . '.bns.php'))) {
             if ($message === null) $message = lang('http.status.' . $status);
 
             return self::view('error.' . $status, [
                 'status' => $status,
                 'message' => $message
             ], $status);
-        } else if (file_exists(path()->resources('views/error/default.view.php'))) {
+        } else if (file_exists(path()->resources('views/error/default.bns.php'))) {
             if ($message === null) $message = lang('http.status.' . $status);
 
             return self::view('error.default', [

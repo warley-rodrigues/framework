@@ -82,28 +82,6 @@ class CompilerPHP
                 continue;
             }
 
-            // urlfull
-            elseif ($value['tag'] == 'urlFull') {
-                if (!empty($value['value'])) {
-                    $this->view = str_replace($value['original'], '<?php echo request()->urlFull' . $value['value'] . ' ?>', $this->view);
-                } else {
-                    $this->view = str_replace($value['original'], '<?php echo request()->urlFull(): ?>', $this->view);
-                }
-
-                continue;
-            }
-
-            // urlfull
-            elseif ($value['tag'] == 'urlFullQuery') {
-                if (!empty($value['value'])) {
-                    $this->view = str_replace($value['original'], '<?php echo request()->urlFullQuery' . $value['value'] . ' ?>', $this->view);
-                } else {
-                    $this->view = str_replace($value['original'], '<?php echo request()->urlFullQuery(): ?>', $this->view);
-                }
-
-                continue;
-            }
-
             if (in_array($value['tag'], $this->tags)) {
                 if (!empty($value['value'])) {
                     $this->view = str_replace($value['original'], '<?php ' . $value['tag'] . $value['value'] . ' ?>', $this->view);

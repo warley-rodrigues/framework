@@ -2,14 +2,6 @@
 
 $path = urldecode(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 
-$folders = [
-    'vendor',
-    'baseonsdev',
-    'baseons-framework',
-    'src',
-    'Collections'
-];
-
 // request
 function method()
 {
@@ -45,10 +37,10 @@ $message = [
     'request' => null
 ];
 
-// $replace =  implode(DIRECTORY_SEPARATOR, $folders);
-// $root = str_replace($replace, '', __DIR__);
+$replace = implode(DIRECTORY_SEPARATOR, ['vendor', 'baseons', 'framework', 'src', 'Collections']);
+$root = str_replace($replace, '', __DIR__);
 
-$root = str_replace('core/Collections', '', __DIR__);
+// $root = str_replace('core/Collections', '', __DIR__);
 
 if ($path !== '/' and is_file($root . 'public' . $path)) {
     $file = $root . 'public' . $path;
@@ -1289,6 +1281,5 @@ if ($path !== '/' and is_file($root . 'public' . $path)) {
 
     WebServerMessage($message);
 
-    require_once($root . '/public/index.php');
-
+    require_once($root . 'public/index.php');
 }

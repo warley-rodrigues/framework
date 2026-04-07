@@ -39,8 +39,8 @@ class Kernel
         ini_set('display_startup_erros', 1);
         error_reporting(E_ALL);
 
-        define('DIRECTORY_BASEONS', DIRECTORY_BASE . DIRECTORY_SEPARATOR . 'core');
-        // define('DIRECTORY_BASEONS', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'src');
+        // define('DIRECTORY_BASEONS', DIRECTORY_BASE . DIRECTORY_SEPARATOR . 'core');
+        define('DIRECTORY_BASEONS', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'src');
 
         self::$configs['session'] = config()->session(default: []);
         self::$configs['app'] = config()->app(default: []);

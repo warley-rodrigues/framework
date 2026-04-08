@@ -6,6 +6,8 @@ use Baseons\Collections\Mime;
 use Baseons\Kernel;
 use Throwable;
 
+use function PHPSTORM_META\type;
+
 class Response
 {
     public static function header(string $name, string|null $value, bool $replace = true)
@@ -181,10 +183,12 @@ class Response
         $type = storage()->isFilePathOrContent($value);
 
         if (!$type) return self::abort(404);
-        if ($status !== null) self::status($status);
 
-        $mime = Mime::originalMime($value);
+        if ($type == 'path') $mime = Mime::mimeByExtension($value);
+        else $mime = Mime::originalMime($value);
+
         if ($mime) self::header('Content-type', $mime);
+        if ($status !== null) self::status($status);
 
         if ($type == 'path') {
             self::header('Content-Length', filesize($value));

@@ -109,7 +109,7 @@ class JobController
 
     public function     start()
     {
-        Shell::exec('php ' . path('/') . ' && php baseons job:master > /dev/null 2>&1 &', name: env('APP_NAME', 'Baseons Job Master'));
+        Shell::exec('php ' . path('/') . ' && php base job:master > /dev/null 2>&1 &', name: env('APP_NAME', 'Baseons Job Master'));
 
         sleep(2);
 
@@ -174,7 +174,7 @@ class JobController
                 continue;
             }
 
-            Shell::exec('php ' . path('/') . ' && php baseons job:execute ' . $key . ' > /dev/null 2>&1 &', name: $job['name']);
+            Shell::exec('php ' . path('/') . ' && php base job:execute ' . $key . ' > /dev/null 2>&1 &', name: $job['name']);
         }
     }
 
@@ -200,7 +200,7 @@ class JobController
 
             $minute = date('i');
 
-            Shell::exec('cd ' . path('/') . ' && php baseons job:clock >> /dev/null 2>&1');
+            Shell::exec('cd ' . path('/') . ' && php base job:clock >> /dev/null 2>&1');
 
             sleep(1);
         }

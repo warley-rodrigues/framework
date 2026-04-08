@@ -25,13 +25,13 @@
   },
   "scripts": {
     "post-autoload-dump": [
-      "@php baseons composer"
+      "@php base composer"
     ],
     "post-root-package-install": [
-      "@php baseons composer"
+      "@php base composer"
     ],
     "post-create-project-cmd": [
-      "@php baseons composer"
+      "@php base composer"
     ]
   },
   "require": {

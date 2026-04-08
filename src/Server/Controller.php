@@ -77,7 +77,7 @@ class Controller
         foreach (self::$servers as $type => $servers) foreach ($servers as $server) {
             if ($name === null or $name === $server['id'] or (!empty($server['name']) and $name and $name == $server['name'])) {
                 if (!ping($server['host'], $server['port'])) {
-                    $command = 'cd ' . path()->base() . '&& php baseons server:run ' . $server['id'] . ' > /dev/null 2>&1 &';
+                    $command = 'cd ' . path()->base() . '&& php base server:run ' . $server['id'] . ' > /dev/null 2>&1 &';
 
                     Shell::exec($command, name: $server['name'], description: 'Baseons Framework Server');
 

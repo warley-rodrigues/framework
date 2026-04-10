@@ -112,7 +112,6 @@ class RouteController
 
                 if ($callback) {
                     $content = executeCallable($callback, [file_get_contents($path), $this->params]);
-
                     if (!is_string($content)) throw new UnexpectedValueException('Invalid callback response, must be a string type');
                 } else $content = file_get_contents($path);
 

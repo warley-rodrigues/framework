@@ -30,7 +30,7 @@ class Debug
 
         return response()->view('exception',  [
             'error' => $error,
-            'include' =>  file_get_contents(path()->framework('Exceptions/views/exception-include.html')),
+            'include' => file_get_contents(path()->framework('Exceptions/views/exception-include.html')),
             'file' =>  htmlspecialchars(file_get_contents($error->getFile())),
             'server' => $server,
             'ms' => number_format((microtime(true) - BASEONS_START) * 1000, 3, '.', '') . ' MS',

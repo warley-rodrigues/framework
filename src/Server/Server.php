@@ -66,41 +66,6 @@ class Server
         return new HttpOptions;
     }
 
-    // public static function mqtt()
-    // {
-    //     // ...
-    // }
-
-    // public static function tcp()
-    // {
-    //     // ...
-    // }
-
-    // // streaming de video
-    // public static function udp()
-    // {
-    //     // ...
-    // }
-
-    // public static function stream(int $port, string $class)
-    // {
-    //     $class = trim($class, '\\');
-
-    //     ServerMemory::server('http', [
-    //         'protocol' => 'stream',
-    //         'host' => null,
-    //         'port' => $port,
-    //         'namespace' => null,
-    //         'class' => $class,
-    //         'name' => null,
-    //         'receive' => true,
-    //         'connections' => null,
-    //         'path' => null
-    //     ]);
-
-    //     return new HttpOptions;
-    // }
-
     public static function ssl(bool $ative, string|null $crt = null, string|null $key = null)
     {
         ServerMemory::setAttribute('ssl', [

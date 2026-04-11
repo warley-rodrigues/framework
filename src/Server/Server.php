@@ -2,6 +2,7 @@
 
 namespace Baseons\Server;
 
+use Baseons\Server\Http\HttpOptions;
 use Baseons\Server\WebSocket\WebSocketOptions;
 
 class Server
@@ -10,9 +11,9 @@ class Server
     private static array $attributes = [];
 
     /**
-     * Create websocket server
+     * Create websocket server swoole
      */
-    public static function ws(int $port, string|array $class)
+    public static function ws(int $port, string $class)
     {
         $class = trim($class, '\\');
 
@@ -38,11 +39,32 @@ class Server
         return new WebSocketOptions;
     }
 
-    // swoole http
-    // public static function http()
-    // {
-    //     // ...
-    // }
+    /**
+     * Create http server swoole
+     */
+    public static function http(int $port, string $class)
+    {
+        $class = trim($class, '\\');
+
+        ServerMemory::server('http', [
+            'protocol' => 'http',
+            'host' => config()->route('server.host', 'localhost'),
+            'alias' => config()->route('server.alias', null) ?? config()->route('server.host', 'localhost'),
+            'port' => $port,
+            'workers' => 5,
+            'namespace' => null,
+            'class' => $class,
+            'name' => null,
+            'path' => ServerMemory::prefix(),
+            'ssl' => [
+                'active' => config()->route('server.ssl.active', false),
+                'crt' => config()->route('server.ssl.crt'),
+                'key' => config()->route('server.ssl.key')
+            ]
+        ]);
+
+        return new HttpOptions;
+    }
 
     // public static function mqtt()
     // {

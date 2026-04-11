@@ -6,26 +6,11 @@ use Baseons\Server\ServerMemory;
 
 class HttpOptions
 {
-    /**
-     * Allow customers to send
-     */
-    public function receive(bool $value = true)
+    public function workers(int $value)
     {
-        $key = array_key_last(ServerMemory::$servers['htttp']);
+        $key = array_key_last(ServerMemory::$servers['http']);
 
-        ServerMemory::$servers['htttp'][$key]['receive'] = $value;
-
-        return $this;
-    }
-
-    /**
-     * Set number of connections
-     */
-    public function connections(int|null $value = null)
-    {
-        $key = array_key_last(ServerMemory::$servers['htttp']);
-
-        ServerMemory::$servers['htttp'][$key]['connections'] = $value;
+        ServerMemory::$servers['http'][$key]['workers'] = $value;
 
         return $this;
     }
@@ -35,31 +20,31 @@ class HttpOptions
      */
     public function name(string $value)
     {
-        $key = array_key_last(ServerMemory::$servers['htttp']);
+        $key = array_key_last(ServerMemory::$servers['http']);
 
-        if (empty(ServerMemory::$servers['htttp'][$key]['name'])) {
-            ServerMemory::$servers['htttp'][$key]['name'] = $value;
+        if (empty(ServerMemory::$servers['http'][$key]['name'])) {
+            ServerMemory::$servers['http'][$key]['name'] = $value;
         } else {
-            ServerMemory::$servers['htttp'][$key]['name'] .= '.' . $value;
+            ServerMemory::$servers['http'][$key]['name'] .= '.' . $value;
         }
-
-        return $this;
-    }
-
-    public function path(string $value)
-    {
-        $key = array_key_last(ServerMemory::$servers['htttp']);
-
-        ServerMemory::$servers['htttp'][$key]['path'] = $value;
 
         return $this;
     }
 
     public function host(string $value)
     {
-        $key = array_key_last(ServerMemory::$servers['htttp']);
+        $key = array_key_last(ServerMemory::$servers['http']);
 
-        ServerMemory::$servers['htttp'][$key]['host'] = $value;
+        ServerMemory::$servers['http'][$key]['host'] = $value;
+
+        return $this;
+    }
+
+    public function alias(string $value)
+    {
+        $key = array_key_last(ServerMemory::$servers['http']);
+
+        ServerMemory::$servers['http'][$key]['alias'] = $value;
 
         return $this;
     }

@@ -64,11 +64,12 @@ class BaseonsCommands
                 Console::command('mail {name}', 'CommandMake::mail')->description('create a new mail');
                 Console::command('model {name} {connection?}', 'CommandMake::model')->description('[--all to create all models] create a new model');
                 Console::command('job {name}', 'CommandMake::job')->description('create a new job');
-                Console::command('ws {name}', 'CommandMake::ws')->description('create a new websocket controller');
                 Console::command('middleware {name}', 'CommandMake::middleware')->description('create a new middleware');
                 Console::command('class {name}', 'CommandMake::class')->description('create a new class');
                 Console::command('console {name}', 'CommandMake::console')->description('create a new console');
                 Console::command('test {name}', 'CommandMake::test')->description('create a new test');
+                Console::command('ws {name}', 'CommandMake::ws')->description('create a new websocket controller');
+                Console::command('http {name}', 'CommandMake::http')->description('create a new http controller');
             });
         });
     }

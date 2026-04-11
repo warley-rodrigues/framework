@@ -296,6 +296,36 @@ class CommandMake
         }
     }
 
+    public function http(string $name)
+    {
+        $params = $this->params($name, path('app/Controllers/Server'));
+
+        if (file_exists($params['path'])) {
+            Shell::red('replace current file ? (y/n)');
+
+            $response = Shell::readline();
+
+            if (strtolower($response) != 'y') {
+                Shell::red('operation canceled')->br();
+
+                return;
+            }
+        }
+
+        $template = view('http', [
+            'name' => $params['name'],
+            'namespace' => $params['namespace']
+        ], false, path()->framework('Templates'));
+
+        storage()->makeFile($params['path'], $template);
+
+        if (file_exists($params['path'])) {
+            Shell::green("http controller {$params['name']} created")->normal($params['path'])->br();
+        } else {
+            Shell::red('failed to create http controller')->br();
+        }
+    }
+
     public function middleware(string $name)
     {
         $params = $this->params($name, path('app/Middlewares'));

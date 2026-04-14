@@ -105,10 +105,13 @@ class RouteController
 
                 if (!file_exists($path) or !is_file($path)) return response()->abort(404, 'File not found');
 
+                $mime = Mime::mimeByExtension($path);
+                if ($mime) response()->contentType($mime);
+
                 $path_json_files = path()->storage('cache/jsons/files.json');
                 $json_files = storage()->getJson($path_json_files, []);
 
-                if ($cache and array_key_exists($path, $json_files) and $json_files[$path]['filemtime'] == filemtime($path) and file_exists($json_files[$path]['file'])) return response()->file($json_files[$path]['file']);
+                if ($cache and array_key_exists($path, $json_files) and $json_files[$path]['filemtime'] == filemtime($path) and file_exists($json_files[$path]['file'])) return response()->terminate(file_get_contents($json_files[$path]['file']));
 
                 if ($callback) {
                     $content = executeCallable($callback, [file_get_contents($path), $this->params]);
@@ -127,7 +130,7 @@ class RouteController
                     storage()->makeJson($path_json_files, $json_files);
                 }
 
-                return response()->file($content);
+                return response()->terminate($content);
             }
 
             $result = executeCallable($this->current['action'], $this->params, $this->current['namespace']);

@@ -8,7 +8,6 @@ use UnexpectedValueException;
 
 class RouteController
 {
-    private string|null $url = null;
     private array $configs = [];
     private array $route = [];
 
@@ -35,7 +34,7 @@ class RouteController
 
         if (!count($this->route)) return;
 
-        $url = $this->url();
+        $url = trim(filter_var(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH), FILTER_SANITIZE_URL), '/');;
         $method = request()->method();
         $domain = request()->domain();
 
@@ -188,12 +187,5 @@ class RouteController
         }, $params);
 
         return false;
-    }
-
-    private function url()
-    {
-        if ($this->url === null) $this->url = trim(filter_var(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH), FILTER_SANITIZE_URL), '/');
-
-        return $this->url;
     }
 }

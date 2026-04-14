@@ -41,7 +41,7 @@ class Upload
             if (!is_uploaded_file($this->input['tmp_name']) or !empty($this->input['error'])) return false;
         } else {
             foreach ($this->input['tmp_name'] as $key => $tmp_name) {
-                if (!is_uploaded_file($tmp_name) and !empty($this->input[$key]['error'])) return false;
+                if (!is_uploaded_file($tmp_name) or !empty($this->input[$key]['error'])) return false;
             }
         }
 

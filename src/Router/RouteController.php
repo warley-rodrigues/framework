@@ -22,7 +22,6 @@ class RouteController
         $this->configs = config()->route('http', []);
 
         foreach ($this->configs as $name => $config) {
-
             Route::config($name);
 
             require_once $config['path'];

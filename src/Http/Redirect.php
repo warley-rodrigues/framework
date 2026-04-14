@@ -20,6 +20,16 @@ class Redirect
         return Kernel::terminate();
     }
 
+    /**
+     * Set a temporary value for the next request
+     */
+    public static function with(mixed $value = null)
+    {
+        request()->session()->with($value);
+
+        return new self;
+    }
+
     public function back(int $status = 302)
     {
         if (isset($_SERVER['HTTP_REFERER'])) {

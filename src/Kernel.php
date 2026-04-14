@@ -107,6 +107,9 @@ class Kernel
             ob_start();
             session_start();
 
+            $request_with = arr()->get($_SESSION, 'request_with.view');
+            if ($request_with !== null and $request_with === false) arr()->set($_SESSION, 'request_with.view', true);
+
             // load helpers
             foreach (self::$configs['app']['helpers'] as $helper) require_once $helper;
 
@@ -198,6 +201,8 @@ class Kernel
         if (!defined('BASEONS_MS')) define('BASEONS_MS', number_format((BASEONS_STOP - BASEONS_START) * 1000, 6, '.', '')); // ms
 
         foreach (self::$terminators as $callback) executeCallable($callback);
+
+        if (session_status() === PHP_SESSION_ACTIVE and arr()->get($_SESSION, 'request_with.view', false)) arr()->unset($_SESSION, 'request_with');
 
         while (ob_get_level()) ob_end_flush();
 

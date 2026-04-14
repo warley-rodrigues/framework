@@ -103,8 +103,8 @@ class Validator
         foreach ($name as $n) {
             if (!$this->has($n)) continue;
 
-            if ($this->data[$n] === 1 or $this->data[$n] === 'on' or $this->data[$n] === 'true') $this->data[$n] = true;
-            if ($this->data[$n] === 0 or $this->data[$n] === 'off' or $this->data[$n] === 'false') $this->data[$n] = false;
+            if ($this->data[$n] == 1 or $this->data[$n] === 'on' or $this->data[$n] === 'true') $this->data[$n] = true;
+            if ($this->data[$n] == 0 or $this->data[$n] === 'off' or $this->data[$n] === 'false') $this->data[$n] = false;
 
             if (gettype($this->data[$n]) !== 'boolean') $this->error($n, $message);
         }
@@ -172,7 +172,7 @@ class Validator
         if (!is_array($name)) $name = [$name];
 
         foreach ($name as $n) {
-            if ($this->has($n) and (gettype($this->data[$n]) !== 'string' or !filter_var($this->data[$n], FILTER_VALIDATE_URL))) $this->error($n, $message);
+            if ($this->has($n) and !str()->isUrl($this->data[$n])) $this->error($n, $message);
         }
 
         return $this;
@@ -183,7 +183,7 @@ class Validator
         if (!is_array($name)) $name = [$name];
 
         foreach ($name as $n) {
-            if ($this->has($n) and (gettype($this->data[$n]) !== 'string' or !filter_var($this->data[$n], FILTER_VALIDATE_EMAIL))) $this->error($n, $message);
+            if ($this->has($n) and !str()->isEmail($this->data[$n])) $this->error($n, $message);
         }
 
         return $this;
@@ -206,6 +206,28 @@ class Validator
 
         foreach ($name as $n) {
             if ($this->has($n) and (gettype($this->data[$n]) !== 'string' or !str()->isCNPJ($this->data[$n]))) $this->error($n, $message);
+        }
+
+        return $this;
+    }
+
+    public function ipv4(string|int|array $name, string $message = 'ipv4')
+    {
+        if (!is_array($name)) $name = [$name];
+
+        foreach ($name as $n) {
+            if ($this->has($n) and !str()->isIPV4($this->data[$n])) $this->error($n, $message);
+        }
+
+        return $this;
+    }
+
+    public function ipv6(string|int|array $name, string $message = 'ipv6')
+    {
+        if (!is_array($name)) $name = [$name];
+
+        foreach ($name as $n) {
+            if ($this->has($n) and !str()->isIPV6($this->data[$n])) $this->error($n, $message);
         }
 
         return $this;

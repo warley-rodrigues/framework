@@ -71,6 +71,12 @@ class CompilerPHP
                 continue;
             }
 
+            // old
+            if ($value['tag'] == 'old') {
+                $this->view = str_replace($value['original'], '<?php echo request()->old(' . trim($value['value'], '\(\)') . ',"")' . ' ?>', $this->view);
+                continue;
+            }
+
             // url
             elseif ($value['tag'] == 'url') {
                 if (!empty($value['value'])) {

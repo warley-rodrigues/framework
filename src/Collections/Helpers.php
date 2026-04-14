@@ -59,6 +59,16 @@ if (!function_exists('response')) {
     }
 }
 
+if (!function_exists('old')) {
+    /**
+     * Returns the value defined in the last request
+     */
+    function old(string|null $key = null, mixed $default = null)
+    {
+        return request()->old($key, $default);
+    }
+}
+
 if (!function_exists('validator')) {
     function validator(array|null $data, array|null $availables = null)
     {

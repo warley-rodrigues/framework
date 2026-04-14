@@ -203,6 +203,16 @@ class Response
         return self::abort(404);
     }
 
+    /**
+     * Set a temporary value for the next request
+     */
+    public static function with(mixed $value = null)
+    {
+        request()->session()->with($value);
+
+        return new self;
+    }
+
     public static function terminate(string|null $value = null, int|null $status = null)
     {
         if ($status !== null) self::status($status);

@@ -233,4 +233,14 @@ class Request
 
         return new Session;
     }
+
+    /**
+     * @return mixed
+     * 
+     * Returns the value defined in the last request
+     */
+    public function old(string|null $key = null, mixed $default = null)
+    {
+        return Session::old($key, $default);
+    }
 }

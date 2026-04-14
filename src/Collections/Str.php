@@ -202,7 +202,6 @@ class Str
     {
         if ($cnpj == null or $cnpj == false) $cnpj = '';
 
-
         $cnpj = preg_replace('/[^0-9]/', '', (string) $cnpj);
 
         if (strlen($cnpj) != 14) return false;
@@ -269,5 +268,15 @@ class Str
         $query_build = http_build_query($query_array);
 
         return $url . (!empty($query_build) ? '?' . $query_build : '');
+    }
+
+    public function isEmail(mixed $value)
+    {
+        return filter_var($value, FILTER_VALIDATE_EMAIL) ? true : false;
+    }
+
+    public function isUrl(mixed $value)
+    {
+        return filter_var($value, FILTER_VALIDATE_URL) ? true : false;
     }
 }

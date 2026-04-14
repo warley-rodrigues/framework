@@ -26,6 +26,27 @@ class Session
     }
 
     /**
+     * Returns the value defined in the last request
+     */
+    public static function old(int|string|null $key = null, mixed $default = null)
+    {
+        if ($key === null) return arr()->get($_SESSION, 'request_with.value', $default);
+
+        return arr()->get($_SESSION, 'request_with.value.' . $key, $default);
+    }
+
+    /**
+     * Set a temporary value for the next request
+     */
+    public static function with(mixed $value = null)
+    {
+        return arr()->set($_SESSION, 'request_with', [
+            'view' => false,
+            'value' => $value
+        ]);
+    }
+
+    /**
      * Check isset session
      * @return bool
      */

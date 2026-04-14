@@ -227,16 +227,16 @@ class Request
     /**
      * @return mixed|Session
      */
-    public function session(string|null $key = null)
+    public function session(string|null $key = null, mixed $default = null)
     {
-        if ($key !== null) return Session::get($key);
+        if ($key !== null) return Session::get($key, $default);
 
         return new Session;
     }
 
     /**
      * @return mixed
-     * 
+     *
      * Returns the value defined in the last request
      */
     public function old(string|null $key = null, mixed $default = null)

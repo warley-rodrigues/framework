@@ -61,7 +61,7 @@ class View
 
         if ($json[$key]['filemtime'] != filemtime($path) or !file_exists($json[$key]['file'])) $delete[] = $json[$key]['file'];
 
-        foreach ($json[$key]['includes'] as $include) if (filemtime($include['file']) != $include['filemtime']) $delete[] = $json[$key]['file'];
+        foreach ($json[$key]['includes'] as $include) if (file_exists($include['file']) and filemtime($include['file']) != $include['filemtime']) $delete[] = $json[$key]['file'];
 
         if (!count($delete)) return $json[$key]['file'];
 

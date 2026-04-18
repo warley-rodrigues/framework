@@ -13,7 +13,9 @@ class ConsoleResolve
     public function run(array $commands)
     {
         global $argv;
+
         unset($argv[0]);
+
         $this->console = preg_replace('/( ){2,}/', '$1', implode(' ', $argv));
 
         foreach ($commands as $value) {

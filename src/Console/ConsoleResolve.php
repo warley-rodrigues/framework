@@ -18,9 +18,7 @@ class ConsoleResolve
 
         $this->console = preg_replace('/( ){2,}/', '$1', implode(' ', $argv));
 
-        foreach ($commands as $value) {
-            if ($this->checkCommand($value['command']))  return $this->execute($value);
-        }
+        foreach ($commands as $value) if ($this->checkCommand($value['command']))  return $this->execute($value);
 
         Shell::red('command not found')->br();
     }

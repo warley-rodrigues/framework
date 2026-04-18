@@ -49,9 +49,9 @@ class BaseonsCommands
             Console::title('Cleaning')->prefix('clear')->group(function () {
                 Console::command(':all', 'CommandCleaning::all')->description('clear all');
                 Console::command(':logs', 'CommandCleaning::logs')->description('clear log files');
-                Console::command(':views', 'CommandCleaning::views')->description('delete cache views');
-                Console::command(':cache', 'CommandCleaning::cache')->description('delete cache files');
-                Console::command(':sessions', 'CommandCleaning::sessions')->description('delete sessions files');
+                Console::command(':views', 'CommandCleaning::views')->description('clear cache views');
+                Console::command(':caches', 'CommandCleaning::caches')->description('clear all cache files');
+                Console::command(':sessions', 'CommandCleaning::sessions')->description('clear sessions files');
             });
 
             Console::title('Makers')->prefix('make:')->group(function () {

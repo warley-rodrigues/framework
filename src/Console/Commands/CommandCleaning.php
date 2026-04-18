@@ -25,9 +25,9 @@ class CommandCleaning
         Shell::green('log files cleaned')->br();
     }
 
-    public function cache()
+    public function caches()
     {
-        $files = storage()->getFiles(path()->storage('cache'),true);
+        $files = storage()->getFiles(path()->storage('cache'), true);
 
         if (is_array($files)) storage()->delete($files);
 
@@ -48,7 +48,7 @@ class CommandCleaning
     public function all()
     {
         $this->logs();
-        $this->cache();
+        $this->caches();
         $this->views();
         $this->sessions();
     }

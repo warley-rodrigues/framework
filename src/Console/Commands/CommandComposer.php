@@ -9,6 +9,8 @@ class CommandComposer
     public function run()
     {
         $paths = [
+            path()->private(),
+
             path()->base('app/Models'),
             path()->base('app/Mails'),
             path()->base('app/Middlewares'),
@@ -18,14 +20,13 @@ class CommandComposer
             path()->base('app/Console'),
             path()->base('app/Classes'),
 
-            path()->private(),
-            path()->base('tests'),
             path()->storage('logs'),
             path()->storage('cache/jsons'),
             path()->storage('cache/views'),
             path()->storage('cache/servers'),
             path()->storage('cache/files'),
 
+            path()->base('tests'),
             path()->base('database/seeders'),
             path()->base('database/migrations')
 
